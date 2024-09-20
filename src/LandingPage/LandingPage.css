@@ -1,0 +1,12 @@
+/* src/LandingPage/LandingPage.css */
+.landing-page {
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  a {
+    color: blue;
+    text-decoration: none;
+  }
+  
