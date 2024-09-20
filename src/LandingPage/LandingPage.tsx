@@ -26,7 +26,7 @@ const LandingPage = () => {
 
       <section>
   <h3>GitHub Repository</h3>
-  <a id="wd-github" href="https://github.com/yourusername/kanbas-react-web-app" target="_blank" rel="noopener noreferrer">
+  <a id="wd-github" href="https://github.com/rachana1707-S/kanbas-react-web-app" target="_blank" rel="noopener noreferrer">
     Kanbas React Web App Repository
   </a>
 </section>
