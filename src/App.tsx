@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import Kanbas from "./Kanbas";
 import LandingPage from './LandingPage/LandingPage';
 
+
 export default function App() {
   return (
     <HashRouter>
