@@ -7,19 +7,19 @@ export default function BootstrapNavigation() {
             <h2>Tabs</h2>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    
                     <a className="nav-link active" href="/">Active</a>
                 </li>
                 <li className="nav-item">
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    
                     <a className="nav-link" href="/">Link</a>
                 </li>
                 <li className="nav-item">
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    
                     <a className="nav-link" href="/">Link</a>
                 </li>
                 <li className="nav-item">
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                    
                     <a className="nav-link disabled" href="/">Disabled</a>
                 </li>
             </ul>
@@ -33,7 +33,7 @@ export default function BootstrapNavigation() {
                         <p className="card-text">
                             Stacking the most powerful rocket in history. Mars or bust!
                         </p>
-                        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                       
                         <a href="/" className="btn btn-primary">Boldly Go</a>
                     </div>
                 </div>
