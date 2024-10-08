@@ -12,9 +12,9 @@ const LandingPage = () => {
       <section>
         <h3>Lab Assignments</h3>
         <ul>
-          <li><a href="http://localhost:3000/#/Labs/Lab1">Lab 1</a></li>
-          <li><a href="http://localhost:3000/#/Labs/Lab2">Lab 2</a></li>
-          <li><a href="http://localhost:3000/#/Labs/Lab3">Lab 3</a></li>
+          <li><a href="#/Labs/Lab1">Lab 1</a></li>
+          <li><a href="#/Labs/Lab2">Lab 2</a></li>
+          <li><a href="#/Labs/Lab3">Lab 3</a></li>
         </ul>
       </section>
 
