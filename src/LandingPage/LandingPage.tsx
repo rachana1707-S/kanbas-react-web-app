@@ -21,7 +21,7 @@ const LandingPage = () => {
       {/* Kanbas App Link */}
       <section>
         <h3>Kanbas Application</h3>
-        <a href="http://localhost:3000/#/Kanbas/Account/Signin">Visit Kanbas</a>
+        <a href="#/Kanbas/Account/Signin">Visit Kanbas</a>
       </section>
 
       <section>
