@@ -1,71 +1,67 @@
-import React, { useState } from 'react';
-import LessonControlButtons from './LessonControlButtons';
-import { BsGripVertical } from 'react-icons/bs';
-import { useParams } from 'react-router-dom'; // To get course ID from the URL
-import * as db from "../../Database"; // Import your assignments database
+import AssignmentControls from "./AssignmentControls";
+import { BsGripVertical } from "react-icons/bs";
+import AssignmentControlButtons from "./AssignmentControlButtons";
+import AssignmentListButtons from "./AssignmentListButtons";
+import { FaRegEdit } from "react-icons/fa";
+import { useParams } from "react-router";
+import { useLocation } from "react-router"
+import { useSelector, useDispatch } from "react-redux";
+import { deleteAssignment } from "./reducer";
+import React from "react";
+export default function Assignments({ canEdit }: { canEdit: boolean; }) {
+    const { cid } = useParams();
+    //const [assignment, setAssignment] = useState("");
+    //const assignments = db.assignments;
+    const { pathname } = useLocation();
+    const path = "#" + pathname + "/"
+    const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+    const dispatch = useDispatch();
 
-export default function Assignments() {
-  const { cid } = useParams(); // Get course ID from the route parameters
-  const assignments = db.assignments;
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+    return (
+        <div id="wd-assignments">
+            {canEdit && (<><AssignmentControls /><br /></>)}
+            <ul id="wd-assignment-list" className="list-group rounded-0 w-100" >
+                <ul id="wd-assignment-list" className="list-group rounded-0 w-100">
+                    <li className="wd-assignment-list-item list-group-item p-0 mb-5 fs-5 border-gray">
+                        <div className="wd-assignments-title p-3 ps-2 bg-secondary" >
+                            <BsGripVertical className="me-2 fs-3" />
+                            Assignments
+                            {canEdit && <AssignmentControlButtons />}
+                        </div>
+                        {assignments
+                            .filter((assignment: any) => assignment.course === cid)
+                            .map((assignment: any) => (
 
-  // Filter assignments by course ID and search term
-  const filteredAssignments = assignments
-    .filter(assignment => assignment.course === cid)
-    .filter(assignment =>
-      assignment.title.toLowerCase().includes(searchTerm.toLowerCase())
+                                <ul className="wd-assignments-lessons list-group rounded-0">
+                                    <li className="wd-lesson list-group-item wd-grid-row p-3 ps-1">
+                                        <div className="wd-grid-col-left-sidebar">
+                                            <BsGripVertical className="me-2 fs-3" />
+                                            {canEdit && <FaRegEdit className="me-2 fs-4" />}
+                                        </div>
+                                        <div className="wd-grid-col-main-content">
+                                            {canEdit && <a className="wd-assignment-link wd-fg-color-black text-decoration-none"
+                                                href={path + assignment._id}>
+                                                <h3>{assignment.title}</h3>
+                                            </a>}
+                                            {!canEdit &&
+                                                <h3>{assignment.title}</h3>
+                                            }
+                                            <p className="wd-fg-color-red"> Multiple Modules <span className="wd-fg-color-black">| Not available until May 6 at 12:00am |
+                                                <br /> Due May 13 at 11:59pm | 100pts</span></p>
+                                        </div>
+                                        <div className="wd-grid-col-right-sidebar">
+                                            {canEdit && <AssignmentListButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => dispatch(deleteAssignment(assignmentId))} />}
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+
+
+                            ))}
+                    </li>
+                </ul>
+            </ul>
+        </div>
     );
-
-  return (
-    <div id="wd-assignments" className="p-3">
-      {/* Search Bar */}
-      <div className="mb-3 d-flex align-items-center">
-        <input
-          id="wd-search-assignment"
-          className="form-control mb-2 me-2" // Add margin to the right
-          placeholder="Search for Assignments"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-
-        {/* Buttons next to the search bar */}
-        <button className="btn btn-light text-danger me-2">+ Group</button>
-        <button className="btn btn-danger">+ Assignment</button>
-      </div>
-
-      {/* Assignments Section */}
-      <ul id="wd-assignments" className="list-group rounded-0">
-        <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-          {/* Title with Button */}
-          <div className="wd-title p-3 ps-2 bg-secondary">
-            <BsGripVertical className="me-2 fs-3" />
-            ASSIGNMENTS {filteredAssignments.length > 0 ? "40%" : "0%"} of Total
-            <button className="btn btn-secondary float-end">+</button>
-          </div>
-
-          {/* List of Assignments */}
-          <ul className="wd-lessons list-group rounded-0">
-            {filteredAssignments.map((assignment) => (
-              <li key={assignment._id} className="wd-lesson list-group-item p-3 ps-1">
-                <BsGripVertical className="me-2 fs-3" />
-                <a
-                  className="wd-assignment-link fs-5 text-decoration-none text-dark"
-                  href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                >
-                  {assignment.title}
-                </a>
-                <p className="m-0 ps-5">
-                  Multiple Modules | <strong>Not available until {new Date(assignment.availableFrom).toLocaleString()}</strong>
-                </p>
-                <p className="m-0 ps-5">
-                  Due {new Date(assignment.dueDate).toLocaleString()} | {assignment.points} pts
-                </p>
-                <LessonControlButtons />
-              </li>
-            ))}
-          </ul>
-        </li>
-      </ul>
-    </div>
-  );
 }
