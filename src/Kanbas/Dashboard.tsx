@@ -1,10 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { addEnrollment, deleteEnrollment } from "./reducer";
+import { useState,useEffect } from "react";
+import { addEnrollment, deleteEnrollment, setEnrollments } from "./reducer";
 import ProtectedRouteCoursePage from "./CourseProtectedRoute";
+import * as courseClient from "../../src/Kanbas/Courses/client";
+import React from "react";
 
 export default function Dashboard(
     { courses, course, setCourse, addNewCourse, deleteCourse, updateCourse, canEdit, roleStudent }: {
@@ -17,6 +18,7 @@ export default function Dashboard(
         roleStudent: boolean;
     }
 ) {
+    // create a useEffect that calles findCoursesForEnrolledUser 
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
     const dispatch = useDispatch();
@@ -25,7 +27,15 @@ export default function Dashboard(
     const showCourses = () => {
         setShowAllCourses((p: any) => !p);
     };
-    
+    const fetchEnrollments = async () => {
+        const enrollments1 = await courseClient.findEnrollments();
+        dispatch(setEnrollments(enrollments1));
+    };
+    useEffect(() => {
+        fetchEnrollments();
+    },);
+
+
     const courseFilter = () => {
         // return showAllCourses ? courses : courses.filter(course => enrollments.some((enrollment: any) => enrollment.user === currentUser._id && enrollments.course === course._id));
         if (showAllCourses) {
@@ -49,12 +59,17 @@ export default function Dashboard(
         );
     }
 
-    const enrollmentToggle = (courseId: string) => {
+    const enrollmentToggle = async (courseId: string) => {
         if (studentEnrolled(courseId)) {
+            const unenroll = await courseClient.unenrollUserInCourse(currentUser._id, courseId);
+            console.log("Unenrolled:", unenroll);
             const enrollmentId = enrollments.find(
                 (e: any) => e.user === currentUser._id && e.course === courseId)._id
             dispatch(deleteEnrollment(enrollmentId));
         } else {
+            // const newEnroll = { user: currentUser._id, course: courseId };
+            const enroll = await courseClient.enrollUserInCourse(currentUser._id, courseId);
+            console.log("Enrolled:", enroll);
             dispatch(addEnrollment({ user: currentUser._id, course: courseId }));
         }
     }
@@ -98,7 +113,7 @@ export default function Dashboard(
                                 <div className="card rounded-3 overflow-hidden">
                                     <Link to={`/Kanbas/Courses/${course._id}/Home`}
                                         className="wd-dashboard-course-link text-decoration-none text-dark" >
-                                        <img src="/rp.jpeg" width="100%" height={160} alt="react" />
+                                        <img src="/images/reactjs.jpg" width="100%" height={160} alt="react" />
                                     </Link>
                                     <div className="card-body">
                                         <h5 className="wd-dashboard-course-title card-title">

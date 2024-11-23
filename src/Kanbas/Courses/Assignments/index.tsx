@@ -6,8 +6,12 @@ import { FaRegEdit } from "react-icons/fa";
 import { useParams } from "react-router";
 import { useLocation } from "react-router"
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
+import { useEffect } from "react";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
 import React from "react";
+
 export default function Assignments({ canEdit }: { canEdit: boolean; }) {
     const { cid } = useParams();
     //const [assignment, setAssignment] = useState("");
@@ -16,6 +20,19 @@ export default function Assignments({ canEdit }: { canEdit: boolean; }) {
     const path = "#" + pathname + "/"
     const { assignments } = useSelector((state: any) => state.assignmentsReducer);
     const dispatch = useDispatch();
+
+    const fetchAssignments = async () => {
+        const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(assignments));
+    };
+    useEffect(() => {
+        fetchAssignments();
+    },);
+
+    const removeAssignment = async (assignmentId: string) => {
+        await assignmentsClient.deleteAssignment(assignmentId);
+        dispatch(deleteAssignment(assignmentId));
+    }
 
     return (
         <div id="wd-assignments">
@@ -29,7 +46,6 @@ export default function Assignments({ canEdit }: { canEdit: boolean; }) {
                             {canEdit && <AssignmentControlButtons />}
                         </div>
                         {assignments
-                            .filter((assignment: any) => assignment.course === cid)
                             .map((assignment: any) => (
 
                                 <ul className="wd-assignments-lessons list-group rounded-0">
@@ -50,7 +66,7 @@ export default function Assignments({ canEdit }: { canEdit: boolean; }) {
                                                 <br /> Due May 13 at 11:59pm | 100pts</span></p>
                                         </div>
                                         <div className="wd-grid-col-right-sidebar">
-                                            {canEdit && <AssignmentListButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => dispatch(deleteAssignment(assignmentId))} />}
+                                            {canEdit && <AssignmentListButtons assignmentId={assignment._id} deleteAssignment={(assignmentId) => removeAssignment(assignmentId)} />}
                                         </div>
 
                                     </li>

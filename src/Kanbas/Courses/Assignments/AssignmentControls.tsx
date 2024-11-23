@@ -1,8 +1,9 @@
+import React from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
-import React from "react";
+
 export default function AssignmentControls() {
     const { cid } = useParams();
     return (

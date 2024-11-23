@@ -1,10 +1,13 @@
+import React from "react";
 import { useParams, useNavigate } from "react-router";
 //import * as db from "../../Database";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { addAssignment, updateAssignment } from "./reducer";
-import React from "react";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
@@ -34,19 +37,29 @@ export default function AssignmentEditor() {
         }
     }, [aid, assignments]);
 
-    const handleSave = () => {
-        console.log(aid);
-        if (aid === "Editor") {
-            dispatch(addAssignment({ course: cid, ...assignment }));
-            console.log("ADDed ASSIGNEMNET", assignment._id)
-        } else {
-            dispatch(updateAssignment(assignment));
-            console.log("update ASSIGNEMNET", assignment)
-        }
-        console.log("ADDING ASSIGNEMNET", assignments)
-        navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    
+
+    const createAssignmentForCourse = async () => {
+        if(!cid) return;
+        const newAssignment = {assignment: assignment, course: cid};
+        const a = await coursesClient.createAssignmentForCourse(cid, newAssignment);
+        console.log("Created assignment:", a);
+        dispatch(addAssignment(assignment));
+    }
+    const saveAssignment = async (assignment: any) => {
+        await assignmentsClient.updateAssignment(assignment);
+        dispatch(updateAssignment(assignment));
+
     }
 
+    const handleSave = () => {
+        if (aid === "Editor") {
+            createAssignmentForCourse();
+        } else {
+            saveAssignment(assignment);
+        }
+        navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    }
 
     return (
         <div id="wd-assignments-editor">
