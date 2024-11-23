@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setCurrentUser } from "./reducer";
 import { useDispatch } from "react-redux";
-import * as db from "../Database";
+//import * as db from "../Database";
 
 //import client to integrate the user routes from the server to the client.
 import * as client from "./client";
