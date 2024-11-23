@@ -1,4 +1,5 @@
 import * as client from "./client";
+import React from "react";
 import { useEffect, useState } from "react";
 import { setCurrentUser } from "./reducer";
 import { useDispatch } from "react-redux";
@@ -16,9 +17,8 @@ export default function Session({ children }: { children: any }) {
     };
     useEffect(() => {
         fetchProfile();
-    },);
+    }, []);
     if (!pending) {
         return children;
     }
-
 }
