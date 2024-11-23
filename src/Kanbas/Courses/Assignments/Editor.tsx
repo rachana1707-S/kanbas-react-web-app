@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams, useNavigate } from "react-router";
 //import * as db from "../../Database";
 import { Link } from "react-router-dom";
@@ -7,7 +6,7 @@ import { useState, useEffect } from "react";
 import { addAssignment, updateAssignment } from "./reducer";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";
-
+import React from "react";
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();

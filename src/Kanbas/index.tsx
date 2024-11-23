@@ -5,7 +5,7 @@ import Dashboard from "./Dashboard"
 import KanbasNavigation from "./Navigation"
 import Courses from "./Courses"
 import "./style.css";
-// import * as client from "./Courses/client";
+//import * as client from "./Courses/client";
 import * as userClient from "./Account/client";
 import * as courseClient from "./Courses/client";
 import { useState } from "react";
@@ -36,7 +36,7 @@ export default function Kanbas() {
         startDate: "2023-09-10", endDate: "2023-12-15", description: "New Description",
     });
     const addNewCourse = async () => {
-        const newCourse = await userClient.createCourse(course);
+        const newCourse = await courseClient.createCourse(course);
         setCourses([...courses, { ...course, newCourse }]);
     };
     const deleteCourse = async (courseId: any) => {

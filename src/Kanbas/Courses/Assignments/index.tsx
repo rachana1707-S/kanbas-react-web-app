@@ -6,7 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { useParams } from "react-router";
 import { useLocation } from "react-router"
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment, setAssignments } from "./reducer";
+import { deleteAssignment, setAssignments, } from "./reducer";
 import { useEffect } from "react";
 import * as coursesClient from "../client";
 import * as assignmentsClient from "./client";

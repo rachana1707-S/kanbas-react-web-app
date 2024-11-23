@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -5,7 +6,7 @@ import { useState,useEffect } from "react";
 import { addEnrollment, deleteEnrollment, setEnrollments } from "./reducer";
 import ProtectedRouteCoursePage from "./CourseProtectedRoute";
 import * as courseClient from "../../src/Kanbas/Courses/client";
-import React from "react";
+
 
 export default function Dashboard(
     { courses, course, setCourse, addNewCourse, deleteCourse, updateCourse, canEdit, roleStudent }: {

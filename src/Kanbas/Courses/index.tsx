@@ -1,4 +1,5 @@
 import React from "react";
+
 import CoursesNavigation from "./Navigation";
 import { Route, Routes, useParams, useLocation } from "react-router";
 import Modules from "./Modules";
@@ -10,7 +11,6 @@ import { FaAlignJustify } from "react-icons/fa";
 import ProtectedRoute from "./Assignments/ProtectedRoute";
 import ProtectedRouteModules from "./Modules/ModulesProtectedRoute";
 import ProtectedRouteHome from "./Home/HomeProtectedRoute";
-
 export default function Courses({ courses }: { courses: any[]; }) {
     const { cid } = useParams();
     const course = courses.find((course) => course._id === cid);

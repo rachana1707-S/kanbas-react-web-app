@@ -13,6 +13,11 @@ const assignmentsSlice = createSlice({
         setAssignments: (state, action) => {
             state.assignments = action.payload;
         },
+
+        setAssignment: (state, action) => {
+            state.assignments = action.payload;
+        },
+
         addAssignment: (state, { payload: assignment }) => {
             const newAssignment: any = {
                 _id: new Date().getTime().toString(),
@@ -36,8 +41,7 @@ const assignmentsSlice = createSlice({
             state.assignments = state.assignments.map((a: any) =>
                 a._id === assignment._id ? assignment : a
             ) as any;
-            // TODO: come back to functionality not working 
-            // state.assignments = [...state.assignments] as any;
+            
         
         },
 

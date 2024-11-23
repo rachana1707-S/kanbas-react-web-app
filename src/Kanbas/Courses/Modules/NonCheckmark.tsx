@@ -1,5 +1,5 @@
 import { FaBan, FaCircle} from "react-icons/fa";
-
+import React from "react";
 export default function NonCheckmark() {
     return(
         <span className="me-1 position-relative">
