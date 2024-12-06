@@ -1,37 +1,51 @@
-import { Routes, Route, Navigate } from "react-router";
-import AccountNavigation from "./Navigation";
-import Signin from "./Signin";
-import Profile from "./Profile";
-import Signup from "./Signup";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import React from "react";
-import Session from "./Session";
+import SignIn from "./Signin";
+import SignUp from "./Signup";
+import Profile from "./Profile";
+import AccountNavigation from "./Navigation";
 import Users from "./Users";
-export default function Account() {
-    const { currentUser } = useSelector((state: any) => state.accountReducer);
-    return (
-      <Session>
-        <div id="wd-account-screen">
-            <table>
-                <tr>
-                    <td valign="top">
-                        <AccountNavigation />
-                    </td>
-                    <td valign="top">
-                        <Routes>
-                            <Route path="/" element={<Navigate to={currentUser ? "/Kanbas/Account/Profile" : "/Kanbas/Account/Signin"} />} />
-                            <Route path="/Signin" element={<Signin />} />
-                            <Route path="/Profile" element={<Profile />} />
-                            <Route path="/Signup" element={<Signup />} />
-                            <Route path="/Users" element={<Users />} />
-                            <Route path="/Users/:uid" element={<Users />} />
 
+function Accounts() {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  return (
+    <div>
+      <h2>Account</h2>
+      <div className='d-flex'>
+        <AccountNavigation />
 
-                        </Routes>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        </Session>
-    );
+        <table>
+          <tbody>
+            <tr>
+              {/* <td valign="top"><AccountNavigation /></td> */}
+              <td valign='top'>
+                <Routes>
+                  {/* <Route index element={<Navigate to="SignIn" replace />} /> */}
+                  <Route
+                    path='/'
+                    element={
+                      <Navigate
+                        to={
+                          currentUser
+                            ? "/Kanbas/Account/Profile"
+                            : "/Kanbas/Account/Signin"
+                        }
+                      />
+                    }
+                  />
+                  <Route path='SignIn' element={<SignIn />} />
+                  <Route path='SignUp' element={<SignUp />} />
+                  <Route path='Profile' element={<Profile />} />
+                  <Route path='/Users' element={<Users />} />
+                  <Route path='/Users/:uid' element={<Users />} />
+                </Routes>
+                {/* <Profile /> */}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
+export default Accounts;

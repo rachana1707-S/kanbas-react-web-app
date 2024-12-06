@@ -1,16 +1,15 @@
-import React from "react";
-import Modules from "../Modules";
+import Modules from "../Modules/index";
 import CourseStatus from "./Status";
-export default function Home({canEdit}: {canEdit: boolean;}) {
-    return (
-        <div className="d-flex" id="wd-home">
-            <div className="flex-fill me-3">
-                <Modules canEdit={false} />
-            </div>
-            {canEdit && <div className="d-none d-md-block">
-                <CourseStatus />
-            </div>}
-        </div>
 
-    );
+export default function Home() {
+  return (
+    <div className='row'>
+      <div className='col-12 col-lg-8'>
+        <Modules />
+      </div>
+      <div className='col-12 col-lg-4'>
+        <CourseStatus />
+      </div>
+    </div>
+  );
 }

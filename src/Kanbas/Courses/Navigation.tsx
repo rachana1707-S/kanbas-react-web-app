@@ -1,38 +1,34 @@
-import { Link, useParams, useLocation } from "react-router-dom";
-import React from 'react';
+import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function CoursesNavigation() {
-  const { cid } = useParams<{ cid: string }>(); // Get the course ID from URL
-  const location = useLocation(); // Get the current location
+  const { pathname } = useLocation();
+  const { cid } = useParams();
 
-  // Define the links array
   const links = [
-    { name: "Home", path: "Home" },
-    { name: "Modules", path: "Modules" },
-    { name: "Piazza", path: "Piazza" },
-    { name: "Zoom", path: "Zoom" },
-    { name: "Assignments", path: "Assignments" },
-    { name: "Quizzes", path: "Quizzes" },
-    { name: "Grades", path: "Grades" },
-    { name: "People", path: "People" }
+    { name: "Home", path: `/Kanbas/Courses/${cid}/Home` },
+    { name: "Modules", path: `/Kanbas/Courses/${cid}/Modules` },
+    { name: "Piazza", path: `/Kanbas/Courses/${cid}/Piazza` },
+    { name: "Zoom", path: `/Kanbas/Courses/${cid}/Zoom` },
+    { name: "Assignments", path: `/Kanbas/Courses/${cid}/Assignments` },
+    { name: "Quizzes", path: `/Kanbas/Courses/${cid}/Quizzes` },
+    { name: "Grades", path: `/Kanbas/Courses/${cid}/Grades` },
+    { name: "People", path: `/Kanbas/Courses/${cid}/People` },
   ];
 
-  // Function to determine if the link is active
-  const isActive = (linkPath: string): boolean => { // Specify the type for linkPath
-    return location.pathname === `/Kanbas/Courses/${cid}/${linkPath}`;
-  };
-
   return (
-    <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0">
-      {links.map(({ name, path }) => (
+    <div
+      id='wd-courses-navigation'
+      className='wd list-group fs-5 rounded-0 me-3'
+    >
+      {links.map((link) => (
         <Link
-          key={name}
-          to={`/Kanbas/Courses/${cid}/${path}`}
-          id={`wd-course-${name.toLowerCase()}-link`}
-          className={`list-group-item border-0 ${isActive(path) ? 'active' : 'text-danger'}`}
-          aria-current={isActive(path) ? 'page' : undefined} // Indicates the active link for accessibility
+          id='wd-course-home-link'
+          to={`${link.path}`}
+          className={`list-group-item border-0 ${
+            pathname.includes(`${link.name}`) ? "active" : "text-danger"
+          }`}
         >
-          {name}
+          {link.name}
         </Link>
       ))}
     </div>
