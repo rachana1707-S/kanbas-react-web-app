@@ -25,6 +25,7 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfile();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div id='wd-profile-screen' className='d-flex justify-content-center'>

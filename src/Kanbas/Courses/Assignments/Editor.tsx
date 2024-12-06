@@ -35,6 +35,7 @@ export default function AssignmentEditor() {
   const [availableUntilDate, setAvailableUntilDate] = useState(
     assignment?.availableUntilDate || new Date().toISOString().slice(0, 16)
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [module, setModule] = useState(assignment?.module || "");
 
   useEffect(() => {
