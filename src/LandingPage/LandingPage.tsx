@@ -28,12 +28,18 @@ const LandingPage = () => {
       </section>
 
       <section>
-  <h3>GitHub Repository</h3>
+  <h3>React GitHub Repository</h3>
   <a id="wd-github" href="https://github.com/rachana1707-S/kanbas-react-web-app" target="_blank" rel="noopener noreferrer">
     Kanbas React Web App Repository
   </a>
 </section>
 
+<section>
+  <h3>Node GitHub Repository</h3>
+  <a id="wd-github" href="https://github.com/rachana1707-S/kanbas-node-server-app" target="_blank" rel="noopener noreferrer">
+    Kanbas Node Repository
+  </a>
+</section>
     </div>
   );
 };
