@@ -1,6 +1,4 @@
 import { FaUserCircle } from "react-icons/fa";
-import { enrollments } from "../../Database";
-import { useParams } from "react-router";
 import {
   Key,
   ReactElement,

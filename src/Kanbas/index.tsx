@@ -70,10 +70,16 @@ const Kanbas = () => {
   useEffect(() => {
     if (enrolling) {
       fetchCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     } else {
       findCoursesForUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, enrolling]);
+  
 
   const addNewCourse = async (course: {
     name: string;

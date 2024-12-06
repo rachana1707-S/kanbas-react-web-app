@@ -95,6 +95,7 @@ export default function Dashboard({
   useEffect(() => {
     getEnrollments();
     fetchCourses();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   return (

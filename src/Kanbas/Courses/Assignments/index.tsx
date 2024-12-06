@@ -31,6 +31,7 @@ export default function Assignments() {
 
   useEffect(() => {
     fetchAllAssignments();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cid, dispatch]);
 
   const removeAssignment = async (assignmentId: string) => {

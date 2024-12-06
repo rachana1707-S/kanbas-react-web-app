@@ -42,6 +42,7 @@ export default function Modules() {
   };
   useEffect(() => {
     fetchModules();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const createModuleForCourse = async () => {
@@ -63,6 +64,7 @@ export default function Modules() {
     fetchModules();
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDeleteModule = (moduleId: string) => {
     setShowDeleteModal(true);
     setModuleToDelete(moduleId);
