@@ -118,8 +118,6 @@ const Kanbas = () => {
     <div id='wd-kanbas' className='kanbas'>
       <Session>
         <div>
-          <table>
-            <tbody>
               <AccountNavigation />
               <div className='wd-main-content-offset p-3'>
                 <Routes>
@@ -160,8 +158,6 @@ const Kanbas = () => {
                   <Route path='Inbox' element={<h1>Inbox</h1>} />
                 </Routes>
               </div>
-            </tbody>
-          </table>
         </div>
       </Session>
     </div>

@@ -7,7 +7,7 @@ import {
   setCourses,
   enrollCourse,
   unenrollCourse,
-} from "./reducer"
+} from "./reducer";
 import { fetchAllCourses } from "../Courses/client";
 import * as enrollmentsClient from "../Dashboard/client";
 

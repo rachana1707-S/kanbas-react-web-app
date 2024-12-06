@@ -33,3 +33,7 @@ body * {
 .wd-lesson {
   border-left: 3px solid green !important;
 }
+
+.p {
+  background-color: transparent;
+}

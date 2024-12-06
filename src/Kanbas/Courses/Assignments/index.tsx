@@ -13,34 +13,30 @@ export default function Assignments() {
   const { cid } = useParams();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const [assignments, setStateAssignments] = useState([]);
-  // const assignments = useSelector((state: any) =>
-  //   state.assignmentReducer ? state.assignmentReducer.assignments : []
-  // );
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchAllAssignments = async () => {
-      try {
-        const fetchedAssignments =
-          await assignmentClient.fetchAssignmentsForCourse(cid as string);
+  const fetchAllAssignments = async () => {
+    try {
+      const fetchedAssignments =
+        await assignmentClient.fetchAssignmentsForCourse(cid as string);
 
-        setStateAssignments(fetchedAssignments);
-        dispatch(setAssignments(fetchedAssignments));
-      } catch (error) {
-        console.error("Error fetching assignments:", error);
-      }
-    };
+      setStateAssignments(fetchedAssignments);
+      dispatch(setAssignments(fetchedAssignments));
+      return fetchedAssignments;
+    } catch (error) {
+      console.error("Error fetching assignments:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchAllAssignments();
   }, [cid, dispatch]);
 
   const removeAssignment = async (assignmentId: string) => {
     try {
-      const assn = await assignmentClient.deleteAssignment(
-        cid ?? "",
-        assignmentId
-      );
-      setStateAssignments(assn);
-      dispatch(setAssignments(assn));
+      await assignmentClient.deleteAssignment(cid ?? "", assignmentId);
+      await fetchAllAssignments();
     } catch (error) {
       console.error("Error deleting assignment:", error);
     }
@@ -71,7 +67,7 @@ export default function Assignments() {
           >
             + Group
           </button>
-          {currentUser.role === "FACULTY" && (
+          {(currentUser.role === "FACULTY" || currentUser.role === "ADMIN") && (
             <Link
               to={`/Kanbas/Courses/${cid}/Assignments/new`}
               className='btn btn-danger ms-2'
@@ -127,7 +123,8 @@ export default function Assignments() {
               <div className='ms-auto d-flex'>
                 <GreenCheckmark />
                 <IoEllipsisVertical className='fs-4' />
-                {currentUser.role === "FACULTY" && (
+                {(currentUser.role === "FACULTY" ||
+                  currentUser.role === "ADMIN") && (
                   <FaTrash
                     className='fs-4 text-danger'
                     onClick={() => removeAssignment(asgn._id)}
