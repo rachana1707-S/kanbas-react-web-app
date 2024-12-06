@@ -4,9 +4,9 @@ import { AiOutlineDashboard } from "react-icons/ai";
 import { IoCalendarOutline } from "react-icons/io5";
 import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
-import { MdHistory } from "react-icons/md"; // History icon
-import { GiFilmProjector } from "react-icons/gi"; // Studio icon (film projector)
-import { FaQuestionCircle } from "react-icons/fa"; // Help icon
+//import { MdHistory } from "react-icons/md"; // History icon
+//import { GiFilmProjector } from "react-icons/gi"; // Studio icon (film projector)
+// import { FaQuestionCircle } from "react-icons/fa"; // Help icon
 
 export default function KanbasNavigation() {
   const { pathname } = useLocation();
@@ -45,27 +45,6 @@ export default function KanbasNavigation() {
           {link.label}
         </Link>
       ))}
-
-      {/* History link */}
-      <Link to="/Kanbas/History" id="wd-history-link"
-        className="list-group-item text-center border-0 bg-black text-white">
-        <MdHistory className="fs-1 text-white" /><br />
-        History
-      </Link>
-
-      {/* Studio link */}
-      <Link to="/Kanbas/Studio" id="wd-studio-link"
-        className="list-group-item text-center border-0 bg-black text-white">
-        <GiFilmProjector className="fs-1 text-white" /><br />
-        Studio
-      </Link>
-
-      {/* Help link */}
-      <Link to="/Kanbas/Help" id="wd-help-link"
-        className="list-group-item text-center border-0 bg-black text-white">
-        <FaQuestionCircle className="fs-1 text-white" /><br />
-        Help
-      </Link>
     </div>
   );
 }

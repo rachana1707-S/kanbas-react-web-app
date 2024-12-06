@@ -9,7 +9,7 @@ import * as courseClient from "../../src/Kanbas/Courses/client";
 
 
 export default function Dashboard(
-    { courses, course, setCourse, addNewCourse, deleteCourse, updateCourse, canEdit, roleStudent }: {
+    { courses, course, setCourse, addNewCourse, deleteCourse, updateCourse, canEdit, roleStudent, enrolling, setEnrolling }: {
         courses: any[]; course: any;
         setCourse: (course: any) => void;
         addNewCourse: () => void;
@@ -17,6 +17,8 @@ export default function Dashboard(
         updateCourse: () => void;
         canEdit: boolean;
         roleStudent: boolean;
+        enrolling: boolean; 
+        setEnrolling: (enrolling: boolean) => void;
     }
 ) {
     // create a useEffect that calles findCoursesForEnrolledUser 
@@ -78,7 +80,12 @@ export default function Dashboard(
 
     return (
         <div id="wd-dashboard">
-            <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+            <h1 id="wd-dashboard-title">
+                Dashboard
+                <button onClick={() => setEnrolling(!enrolling)} className="float-end btn btn-primary" >
+          {enrolling ? "My Courses" : "All Courses"}
+        </button>
+        </h1> <hr />
             {canEdit && <>
                 <h5>New Course
                     <button className="btn btn-primary float-end"
@@ -108,7 +115,7 @@ export default function Dashboard(
 
             <div id="wd-dashboard-courses" className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
-                    {courseFilter()
+                    {courses
                         .map((course) => (
                             <div className="wd-dashboard-course col" style={{ width: "300px" }} key={course._id}>
                                 <div className="card rounded-3 overflow-hidden">
@@ -118,6 +125,12 @@ export default function Dashboard(
                                     </Link>
                                     <div className="card-body">
                                         <h5 className="wd-dashboard-course-title card-title">
+                                        {enrolling && (
+              <button className={`btn ${ course.enrolled ? "btn-danger" : "btn-success" } float-end`} >
+                {course.enrolled ? "Unenroll" : "Enroll"}
+              </button>
+            )}
+
                                             {course.name}
                                         </h5>
                                         <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>

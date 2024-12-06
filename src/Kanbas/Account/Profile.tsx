@@ -9,6 +9,7 @@ export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  console.log(currentUser)
 
   //update profile
   const updateProfile = async () => {
