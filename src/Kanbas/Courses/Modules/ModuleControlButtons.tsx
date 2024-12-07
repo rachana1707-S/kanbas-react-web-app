@@ -18,13 +18,13 @@ export default function ModuleControlButtons({
   const userRole = currentUser.role;
   return (
     <div className='float-end'>
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <FaPencil
           onClick={() => editModule(moduleId)}
           className='text-primary me-3'
         />
       )}
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <FaTrash
           className='text-danger me-2 mb-1'
           onClick={() => deleteModule(moduleId)}

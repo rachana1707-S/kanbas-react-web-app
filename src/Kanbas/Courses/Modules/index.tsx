@@ -40,10 +40,10 @@ export default function Modules() {
     const modules = await coursesClient.findModulesForCourse(cid as string);
     dispatch(setModules(modules));
   };
+
   useEffect(() => {
     fetchModules();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentUser]);
 
   const createModuleForCourse = async () => {
     if (!cid) return;
@@ -64,7 +64,6 @@ export default function Modules() {
     fetchModules();
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDeleteModule = (moduleId: string) => {
     setShowDeleteModal(true);
     setModuleToDelete(moduleId);
@@ -103,20 +102,23 @@ export default function Modules() {
               <BsGripVertical className='me-2 fs-3' />
               {/* {module.name} {/* Dynamically render the module name */}
               {!module.editing && module.name}
-              {userRole === "FACULTY" && module.editing && (
-                <input
-                  className='form-control w-50 d-inline-block'
-                  onChange={(e) =>
-                    dispatch(updateModule({ ...module, name: e.target.value }))
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      saveModule({ ...module, editing: false });
+              {(userRole === "FACULTY" || userRole === "ADMIN") &&
+                module.editing && (
+                  <input
+                    className='form-control w-50 d-inline-block'
+                    onChange={(e) =>
+                      dispatch(
+                        updateModule({ ...module, name: e.target.value })
+                      )
                     }
-                  }}
-                  defaultValue={module.name}
-                />
-              )}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        saveModule({ ...module, editing: false });
+                      }
+                    }}
+                    defaultValue={module.name}
+                  />
+                )}
               <ModuleControlButtons
                 moduleId={module._id}
                 // deleteModule={(moduleId) => {
