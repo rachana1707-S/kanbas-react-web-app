@@ -102,14 +102,14 @@ export default function Dashboard({
     <div id='wd-dashboard'>
       <h1 id='wd-dashboard-title'>
         Dashboard
-        <button
+        {/* <button
           onClick={() => setEnrolling(!enrolling)}
           className='float-end btn btn-primary'
         >
           {enrolling ? "My Courses" : "All Courses"}
-        </button>
+        </button> */}
       </h1>
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <div className='card p-3 mb-4'>
           <h5 className='mb-3'>
             New Course
@@ -267,7 +267,7 @@ export default function Dashboard({
                       >
                         Go
                       </Link>
-                      {userRole === "FACULTY" && (
+                      {(userRole === "FACULTY" || userRole === "ADMIN") && (
                         <button
                           onClick={(event) => {
                             event.preventDefault();
@@ -280,7 +280,7 @@ export default function Dashboard({
                           Delete
                         </button>
                       )}
-                      {userRole === "FACULTY" && (
+                      {(userRole === "FACULTY" || userRole === "ADMIN") && (
                         <button
                           id='wd-edit-course-click'
                           onClick={(event) => {

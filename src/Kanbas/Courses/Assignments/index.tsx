@@ -92,7 +92,8 @@ export default function Assignments() {
             <span className='border border-1 border-dark bg-white p-2 rounded-5'>
               40% of Total
             </span>
-            {currentUser.role === "FACULTY" && <FaPlus className='ms-2' />}
+            {(currentUser.role === "FACULTY" ||
+              currentUser.role === "ADMIN") && <FaPlus className='ms-2' />}
             <IoEllipsisVertical className='fs-4 ms-2' />
           </span>
         </h5>

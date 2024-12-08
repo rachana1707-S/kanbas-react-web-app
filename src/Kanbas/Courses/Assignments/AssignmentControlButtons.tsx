@@ -18,7 +18,7 @@ export default function AssignmentControlButtons({
           style={{ cursor: "pointer" }}
           className='text-success me-2 fs-5'
         />
-        {userRole === "FACULTY" && (
+        {(userRole === "FACULTY" || userRole === "ADMIN") && (
           <FaTrash
             style={{ cursor: "pointer" }}
             className='text-danger me-2 fs-5'

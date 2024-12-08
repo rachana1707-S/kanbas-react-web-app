@@ -29,7 +29,7 @@ export default function CourseStatus() {
       <button>Delete Course</button>
       <button>View Enrollment</button> */}
 
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <div className='d-flex'>
           <div className='w-50 pe-1'>
             <button className='btn btn-lg btn-secondary w-100 text-nowrap '>
@@ -44,19 +44,19 @@ export default function CourseStatus() {
         </div>
       )}
       <br />
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <button className='btn btn-lg btn-secondary w-100 mt-1 text-start'>
           <BiImport className='me-2 fs-5' /> Import Existing Content{" "}
         </button>
       )}
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <button className='btn btn-lg btn-secondary w-100 mt-1 text-start'>
           <LiaFileImportSolid className='me-2 fs-5' /> Import from Commons{" "}
         </button>
       )}
 
       {/* home page */}
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <button className='btn btn-lg btn-secondary w-100 mt-1 text-start'>
           <IoMdHome className='me-2 fs-5' /> Choose Home Page{" "}
         </button>
@@ -78,14 +78,14 @@ export default function CourseStatus() {
       </button> */}
 
       {/* New Course */}
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <button className='btn btn-lg btn-secondary w-100 mt-1 text-start'>
           <TfiAnnouncement className='me-2 fs-5' /> New Annoucement{" "}
         </button>
       )}
 
       {/* New Analytics */}
-      {userRole === "FACULTY" && (
+      {(userRole === "FACULTY" || userRole === "ADMIN") && (
         <button className='btn btn-lg btn-secondary w-100 mt-1 text-start'>
           <SiSimpleanalytics className='me-2 fs-5' /> New Analytics{" "}
         </button>
