@@ -1,9 +1,12 @@
 # Kanbas - Course Management Web App
 
+![Kanbas Banner](assets/banner.png)
+
 ## Overview
 Kanbas is a web-based course management application designed to facilitate online learning and collaboration. The platform enables instructors to manage course materials, assignments, and student interactions efficiently, while providing students with an intuitive interface to track progress, submit assignments, and engage with course content.
 
 ## Features
+![Kanbas Dashboard](assets/dashboard.png)
 - **User Authentication**: Role-based access control for students and faculty.
 - **Course Management**: Create, update, and manage courses.
 - **Assignment Handling**: Add, edit, and submit assignments with deadline tracking.
@@ -21,6 +24,7 @@ Kanbas is a web-based course management application designed to facilitate onlin
 - **Version Control**: Git/GitHub
 
 ## Installation
+![Kanbas Installation](assets/install.png)
 1. Clone the repository:
    ```bash
    git clone https://github.com/rachana_1707-S/kanbas.git
