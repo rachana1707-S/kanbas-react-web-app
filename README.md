@@ -95,10 +95,6 @@ Kanbas is a web-based course management application designed to facilitate onlin
    ```
 5. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Contact
 
 For any questions or collaborations, contact [Rachana Sudhakar](mailto:rachanasudhakar17@gmail.com).
